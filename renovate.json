@@ -1,30 +1,30 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended"],
-	"timezone": "Asia/Tokyo",
-	"labels": ["dependencies"],
-	"rangeStrategy": "bump",
-	"prConcurrentLimit": 5,
-	"packageRules": [
-		{
-			"matchDepTypes": ["devDependencies"],
-			"groupName": "dev dependencies",
-			"labels": ["dev-deps"]
-		},
-		{
-			"matchPackageNames": ["next", "react", "react-dom", "eslint-config-next"],
-			"groupName": "nextjs core",
-			"labels": ["nextjs"]
-		},
-		{
-			"matchPackagePrefixes": ["@opennextjs/"],
-			"groupName": "opennext",
-			"labels": ["cloudflare"]
-		},
-		{
-			"matchPackageNames": ["wrangler"],
-			"groupName": "cloudflare wrangler",
-			"labels": ["cloudflare"]
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Tokyo",
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "dev dependencies",
+      "labels": ["dev-deps"]
+    },
+    {
+      "matchPackageNames": ["next", "react", "react-dom", "eslint-config-next"],
+      "groupName": "nextjs core",
+      "labels": ["nextjs"]
+    },
+    {
+      "matchPackagePrefixes": ["@opennextjs/"],
+      "groupName": "opennext",
+      "labels": ["cloudflare"]
+    },
+    {
+      "matchPackageNames": ["wrangler"],
+      "groupName": "cloudflare wrangler",
+      "labels": ["cloudflare"]
+    }
+  ]
 }
