@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint",
-	"lint:biome": "biome check ./src",
-	"fix:biome": "biome check --write ./src",
+    "lint:biome": "biome check ./src",
+    "fix:biome": "biome check --write ./src",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
+    "knip": "knip"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.14.4",
@@ -29,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "knip": "^5.82.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "^4.59.2"
