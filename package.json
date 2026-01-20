@@ -9,6 +9,8 @@
     "lint:next": "next lint",
     "lint:biome": "biome check ./src",
     "fix:biome": "biome check --write ./src",
+    "lint": "run-p lint:*",
+    "fix": "run-s fix:*",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
@@ -31,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "knip": "^5.82.0",
+    "npm-run-all2": "^8.0.4",
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "^4.59.2"
