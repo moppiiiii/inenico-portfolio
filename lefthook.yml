@@ -17,7 +17,7 @@ pre-commit:
       run: |
         pnpm run knip || printf "\e[43m\e[30mWarning: Unused files detected.\e[0m\n"
 
-# commit-msg:
-#   commands:
-#     commitlint:
-#       run: npx commitlint --edit {1}
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit {1}
