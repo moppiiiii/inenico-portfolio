@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "tags": [
+    "-lintignore"
+  ],
+  "ignore": [
+    "open-next.config.ts",
+    "postcss.config.mjs"
+  ],
+  "ignoreDependencies": [
+    "eslint",
+    "eslint-config-next"
+  ]
+}
