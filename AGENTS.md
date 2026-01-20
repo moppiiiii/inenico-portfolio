@@ -54,13 +54,20 @@ Scripts are defined in `package.json`. Prefer `pnpm` (because `pnpm-lock.yaml` e
 - **Dev (Next dev)**: `pnpm dev`
 - **Build (Next build)**: `pnpm build`
 - **Start (Next start)**: `pnpm start`
-- **Lint**: `pnpm lint`
+- **Lint (all)**: `pnpm lint` (runs `lint:next` and `lint:biome`)
+- **Lint (Next)**: `pnpm lint:next`
+- **Lint (Biome)**: `pnpm lint:biome`
+- **Fix (all)**: `pnpm fix` (runs `fix:biome`)
+- **Fix (Biome)**: `pnpm fix:biome`
 - **Cloudflare preview (local on Workers runtime)**: `pnpm preview`
   - `opennextjs-cloudflare build && opennextjs-cloudflare preview`
 - **Deploy**: `pnpm deploy`
   - `opennextjs-cloudflare build && opennextjs-cloudflare deploy`
+- **Upload**: `pnpm upload`
+  - `opennextjs-cloudflare build && opennextjs-cloudflare upload`
 - **Type generation (Cloudflare bindings)**: `pnpm cf-typegen`
   - Output file: `./cloudflare-env.d.ts` (do not edit manually)
+- **Dead code check**: `pnpm knip`
 
 ## Cloudflare / OpenNext assumptions (important)
 
