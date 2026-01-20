@@ -33,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "knip": "^5.82.0",
+    "lefthook": "^2.0.15",
     "npm-run-all2": "^8.0.4",
     "tailwindcss": "^4",
     "typescript": "^5",
