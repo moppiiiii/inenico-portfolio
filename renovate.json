@@ -4,7 +4,6 @@
   "timezone": "Asia/Tokyo",
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
-  "prConcurrentLimit": 5,
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
