@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatedBackground } from "@/app/components/animated-background";
-import { CreativeNav } from "@/app/components/creative-nav";
-import { PageTransition } from "@/app/components/page-transition";
+import { AnimatedBackground } from "@/components/animated-background";
+import { CreativeNav } from "@/components/creative-nav";
+import { PageTransition } from "@/components/page-transition";
 
 export default function HomePage() {
   return (
