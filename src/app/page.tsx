@@ -108,7 +108,7 @@ export default function HomePage() {
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/10 border border-border/20 rounded-full rotate-3" />
 
                 <Image
-                  src="/images/ineniko-waving.png"
+                  src="/images/inenico-waving.png"
                   alt="いねにこ"
                   width={350}
                   height={350}
