@@ -52,7 +52,7 @@ export default function AboutPage() {
                   >
                     <div className="backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl p-8 rounded-full">
                       <Image
-                        src="/images/ineniko-laptop.png"
+                        src="/images/inenico-laptop.png"
                         alt="いねにこ working"
                         width={300}
                         height={300}
