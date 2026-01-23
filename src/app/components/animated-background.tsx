@@ -61,16 +61,27 @@ function GridLines() {
 }
 
 function FloatingParticles() {
-  const [particles] = useState(() =>
-    Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 1,
-      duration: Math.random() * 10 + 15,
-      delay: Math.random() * 5,
-    })),
-  );
+  const [particles] = useState(() => {
+    // Hydration-safe: deterministic values (no runtime randomness).
+    const random = (seed: number) => {
+      let t = seed + 0x6d2b79f5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+
+    return Array.from({ length: 30 }, (_, i) => {
+      const s = i * 5;
+      return {
+        id: i,
+        x: random(s + 1) * 100,
+        y: random(s + 2) * 100,
+        size: random(s + 3) * 4 + 1,
+        duration: random(s + 4) * 10 + 15,
+        delay: random(s + 5) * 5,
+      };
+    });
+  });
 
   return (
     <>
