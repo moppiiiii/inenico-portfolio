@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://inenico.dev"),
+  metadataBase: new URL("https://portfolio.inenico.dev"),
   title: "inenico's portfolio",
   description: "Frontend Developer - ゆるく、でも真剣に。",
   alternates: {
