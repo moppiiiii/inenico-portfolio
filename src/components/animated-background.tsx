@@ -1,7 +1,27 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const onChange = () => setMatches(media.matches);
+
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, [query]);
+
+  return matches;
+}
 
 function FloatingOrb({
   size,
@@ -404,6 +424,37 @@ function MorphingBlobs() {
 }
 
 export function AnimatedBackground() {
+  const reducedMotion = useReducedMotion();
+  const isCoarsePointer = useMediaQuery("(pointer: coarse)");
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const isFinePointer = useMediaQuery("(pointer: fine)");
+
+  // モバイル/省電力環境では、常時アニメ + blur 多用 + rAF（SVGパス書き換え）を避ける
+  const lowPower = reducedMotion || isCoarsePointer || isSmallScreen;
+
+  if (lowPower) {
+    return (
+      <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
+        {/* 軽量な静的グラデーション（モバイル向け） */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 30%, oklch(0.55 0.12 200 / 0.18), transparent 55%), radial-gradient(circle at 80% 70%, oklch(0.55 0.12 180 / 0.14), transparent 55%)",
+          }}
+        />
+        <GridLines />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, oklch(0.13 0.02 250 / 0.55) 100%)",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
       {/* Aurora bands */}
@@ -448,7 +499,7 @@ export function AnimatedBackground() {
       <FloatingParticles />
 
       {/* Mouse follower glow */}
-      <MouseFollower />
+      {isFinePointer && <MouseFollower />}
 
       {/* Noise texture */}
       <div
