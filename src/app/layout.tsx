@@ -13,10 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://inenico.dev"),
   title: "inenico's portfolio",
   description: "Frontend Developer - ゆるく、でも真剣に。",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    images: ["/opengraph-image"],
+    images: "/images/inenico-opengraph.png",
   },
 };
 
