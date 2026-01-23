@@ -15,7 +15,7 @@ const skills = [
 
 const experiences = [
   { year: "2025 - now", role: "Frontend Dev Lead", company: "???" },
-  { year: "2023 - 2025", role: "Frontend Dev Lead", company: "Tech Co." },
+  { year: "2023 - 2025", role: "Frontend Dev Lead", company: "YUMEMI Inc." },
   {
     year: "2020 - 2023",
     role: "Frontend Dev / Lead",
