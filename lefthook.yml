@@ -1,0 +1,23 @@
+pre-push:
+  commands:
+    packages_audit:
+      run: pnpm audit
+
+pre-commit:
+  parallel: true
+  commands:
+    biome_check:
+      run: pnpm exec biome check --write --staged --no-errors-on-unmatched --files-ignore-unknown=true && git update-index --again
+
+    typecheck:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx tsc --noEmit
+
+    knip:
+      run: |
+        pnpm run knip || printf "\e[43m\e[30mWarning: Unused files detected.\e[0m\n"
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit {1}
