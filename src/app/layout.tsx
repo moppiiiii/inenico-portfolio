@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio.inenico.dev"),
   title: "inenico's portfolio",
   description: "Frontend Developer - ゆるく、でも真剣に。",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     images: "/images/inenico-opengraph.png",
   },
