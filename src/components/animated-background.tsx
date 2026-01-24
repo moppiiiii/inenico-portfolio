@@ -8,21 +8,6 @@ import {
 } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const onChange = () => setMatches(media.matches);
-
-    onChange();
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
-  }, [query]);
-
-  return matches;
-}
-
 function FloatingOrb({
   size,
   color,
@@ -425,17 +410,10 @@ function MorphingBlobs() {
 
 export function AnimatedBackground() {
   const reducedMotion = useReducedMotion();
-  const isCoarsePointer = useMediaQuery("(pointer: coarse)");
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
-  const isFinePointer = useMediaQuery("(pointer: fine)");
 
-  // モバイル/省電力環境では、常時アニメ + blur 多用 + rAF（SVGパス書き換え）を避ける
-  const lowPower = reducedMotion || isCoarsePointer || isSmallScreen;
-
-  if (lowPower) {
+  if (reducedMotion) {
     return (
       <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
-        {/* 軽量な静的グラデーション（モバイル向け） */}
         <div
           className="absolute inset-0"
           style={{
@@ -499,7 +477,7 @@ export function AnimatedBackground() {
       <FloatingParticles />
 
       {/* Mouse follower glow */}
-      {isFinePointer && <MouseFollower />}
+      <MouseFollower />
 
       {/* Noise texture */}
       <div
