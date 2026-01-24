@@ -24,6 +24,7 @@ export function CreativeNav() {
       {/* Menu Toggle Button - Fixed position */}
       <motion.button
         type="button"
+        aria-label="Menu button"
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-6 right-6 z-[100] w-14 h-14 backdrop-blur-2xl bg-card/40 border border-border/50 rounded-full flex items-center justify-center hover:bg-card/60 transition-colors"
         whileHover={{ scale: 1.1 }}
