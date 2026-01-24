@@ -193,7 +193,7 @@ function ColorWaveEffect({
 }: ColorWaveEffectProps) {
   const pathRefs = useRef<(SVGPathElement | null)[]>([]);
   const animationRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const lastFrameTimeRef = useRef<number>(0);
   const frameInterval = 1000 / maxFps;
 
@@ -258,6 +258,11 @@ function ColorWaveEffect({
     if (disabled) return;
 
     const animate = (now: number) => {
+      if (startTimeRef.current === 0) {
+        startTimeRef.current = now;
+        lastFrameTimeRef.current = now;
+      }
+
       if (now - lastFrameTimeRef.current < frameInterval) {
         animationRef.current = requestAnimationFrame(animate);
         return;
@@ -281,6 +286,8 @@ function ColorWaveEffect({
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      startTimeRef.current = 0;
+      lastFrameTimeRef.current = 0;
     };
   }, [disabled, frameInterval, generatePath, pathConfigs]);
 
