@@ -89,7 +89,7 @@ export default function HomePage() {
 
             {/* Right - Character */}
             <motion.div
-              className="relative flex justify-center lg:justify-end"
+              className="pointer-events-none relative flex justify-center lg:justify-end"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
