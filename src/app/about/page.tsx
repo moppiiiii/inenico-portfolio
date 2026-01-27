@@ -130,11 +130,13 @@ export default function AboutPage() {
                       <div
                         key={exp.year}
                         className="flex items-center gap-4 text-sm"
-                        style={{
-                          animationDelay: `${1500 + index * 100}ms`,
-                        }}
                       >
-                        <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]">
+                        <div
+                          className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
+                          style={{
+                            animationDelay: `${1500 + index * 100}ms`,
+                          }}
+                        >
                           <span className="text-muted-foreground font-mono w-28">
                             {exp.year}
                           </span>
