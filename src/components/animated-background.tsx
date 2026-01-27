@@ -1,12 +1,27 @@
 "use client";
 
 import {
-  motion,
+  domAnimation,
+  LazyMotion,
+  m as motion,
   useMotionValue,
   useReducedMotion,
   useSpring,
 } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+function useDocumentVisible() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const update = () => setIsVisible(document.visibilityState === "visible");
+    update();
+    document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, []);
+
+  return isVisible;
+}
 
 function useIsCoarsePointer() {
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
@@ -344,6 +359,7 @@ function ColorWaveEffect({
           ref={(el) => {
             pathRefs.current[i] = el;
           }}
+          d={generatePath(config, 0)}
           fill="none"
           stroke={`url(#wave-gradient-${i})`}
           strokeWidth={config.strokeWidth}
@@ -443,6 +459,7 @@ function MorphingBlobs({ scale }: { scale: number }) {
     "M39.9,-68.1C52.5,-61.8,64,-52.4,72.2,-40.3C80.4,-28.2,85.3,-13.3,84.5,1.1C83.7,15.5,77.2,29.5,68.4,41.8C59.6,54.1,48.5,64.7,35.5,71.1C22.5,77.5,7.6,79.7,-7.1,78.6C-21.8,77.5,-36.3,73.1,-48.5,65C-60.7,56.9,-70.6,45.1,-76.4,31.4C-82.2,17.7,-83.9,2.1,-81.1,-12.5C-78.3,-27.1,-71,-40.7,-60.4,-51.1C-49.8,-61.5,-35.9,-68.7,-22,-73.4C-8.1,-78.1,5.8,-80.3,19.5,-78.3C33.2,-76.3,46.7,-70.1,39.9,-68.1Z",
     "M47.7,-79.5C61.5,-72.7,72.5,-59.5,79.4,-44.7C86.3,-29.9,89.1,-13.5,87.3,2.1C85.5,17.7,79.1,32.4,70,45C60.9,57.6,49.1,68.1,35.4,74.5C21.7,80.9,6.1,83.2,-9.3,81.4C-24.7,79.6,-39.9,73.7,-52.5,64.5C-65.1,55.3,-75.1,42.8,-80.6,28.4C-86.1,14,-87.1,-2.3,-83,-17.1C-78.9,-31.9,-69.7,-45.2,-57.6,-52.9C-45.5,-60.6,-30.5,-62.7,-16.7,-67.6C-2.9,-72.5,9.7,-80.2,23.1,-81.7C36.5,-83.2,50.7,-78.5,47.7,-79.5Z",
   ];
+  const reversedBlobPaths = [...blobPaths].reverse();
 
   const leftSize = Math.round(600 * scale);
   const leftOffset = Math.round(200 * scale);
@@ -465,6 +482,8 @@ function MorphingBlobs({ scale }: { scale: number }) {
         <title>Morphing Blobs</title>
         <motion.path
           fill="oklch(0.5 0.12 180 / 0.3)"
+          d={blobPaths[0]}
+          initial={{ d: blobPaths[0] }}
           animate={{
             d: blobPaths,
           }}
@@ -490,8 +509,10 @@ function MorphingBlobs({ scale }: { scale: number }) {
         <title>Morphing Blobs</title>
         <motion.path
           fill="oklch(0.45 0.1 200 / 0.25)"
+          d={reversedBlobPaths[0]}
+          initial={{ d: reversedBlobPaths[0] }}
           animate={{
-            d: [...blobPaths].reverse(),
+            d: reversedBlobPaths,
           }}
           transition={{
             duration: 18,
@@ -505,9 +526,52 @@ function MorphingBlobs({ scale }: { scale: number }) {
   );
 }
 
-export function AnimatedBackground() {
+type AnimatedBackgroundProps = {
+  renderBase?: boolean;
+};
+
+export function AnimatedBackground({
+  renderBase = true,
+}: AnimatedBackgroundProps) {
   const reducedMotion = useReducedMotion();
   const isCoarsePointer = useIsCoarsePointer();
+  const isDocumentVisible = useDocumentVisible();
+  const [isEnhanced, setIsEnhanced] = useState(false);
+
+  useEffect(() => {
+    // Progressive enhancement: keep initial load light, then enable full motion.
+    // (Skip if reduced motion is requested.)
+    if (reducedMotion) return;
+
+    let didCancel = false;
+    let timeoutId: ReturnType<typeof globalThis.setTimeout> | null = null;
+    let idleId: number | null = null;
+
+    const enable = () => {
+      if (didCancel) return;
+      setIsEnhanced(true);
+    };
+
+    const g = globalThis as typeof globalThis & {
+      requestIdleCallback?: (
+        callback: IdleRequestCallback,
+        options?: IdleRequestOptions,
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (typeof g.requestIdleCallback === "function") {
+      idleId = g.requestIdleCallback(() => enable(), { timeout: 1500 });
+    } else {
+      timeoutId = g.setTimeout(enable, 900);
+    }
+
+    return () => {
+      didCancel = true;
+      if (idleId !== null) g.cancelIdleCallback?.(idleId);
+      if (timeoutId !== null) g.clearTimeout(timeoutId);
+    };
+  }, [reducedMotion]);
 
   const profile = useMemo(() => {
     if (reducedMotion) {
@@ -560,100 +624,126 @@ export function AnimatedBackground() {
     };
   }, [isCoarsePointer, reducedMotion]);
 
+  const isActive =
+    isEnhanced && isDocumentVisible && profile.variant !== "reduced";
+
   if (profile.variant === "reduced") {
+    if (!renderBase) {
+      return null;
+    }
     return (
-      <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 30%, oklch(0.55 0.12 200 / 0.18), transparent 55%), radial-gradient(circle at 80% 70%, oklch(0.55 0.12 180 / 0.14), transparent 55%)",
-          }}
-        />
-        <GridLines opacityClassName={profile.gridOpacity} />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 0%, oklch(0.13 0.02 250 / 0.55) 100%)",
-          }}
-        />
-      </div>
+      <LazyMotion features={domAnimation}>
+        <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(circle at 20% 30%, oklch(0.55 0.12 200 / 0.18), transparent 55%), radial-gradient(circle at 80% 70%, oklch(0.55 0.12 180 / 0.14), transparent 55%)",
+            }}
+          />
+          <GridLines opacityClassName={profile.gridOpacity} />
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, transparent 0%, oklch(0.13 0.02 250 / 0.55) 100%)",
+            }}
+          />
+        </div>
+      </LazyMotion>
     );
   }
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
-      {/* Aurora bands */}
-      <AuroraBands blurClassName={profile.bandBlur} />
-
-      {/* Morphing blobs */}
-      <MorphingBlobs scale={profile.blobScale} />
-
-      {/* Large gradient orbs */}
-      <FloatingOrb
-        size={Math.round(600 * profile.blobScale)}
-        color="radial-gradient(circle, oklch(0.45 0.15 200) 0%, transparent 70%)"
-        initialX="10%"
-        initialY="20%"
-        duration={25}
-        blurClassName={profile.orbBlur}
-      />
-      <FloatingOrb
-        size={Math.round(500 * profile.blobScale)}
-        color="radial-gradient(circle, oklch(0.5 0.12 280) 0%, transparent 70%)"
-        initialX="60%"
-        initialY="50%"
-        duration={30}
-        blurClassName={profile.orbBlur}
-      />
-      <FloatingOrb
-        size={Math.round(400 * profile.blobScale)}
-        color="radial-gradient(circle, oklch(0.4 0.1 160) 0%, transparent 70%)"
-        initialX="30%"
-        initialY="70%"
-        duration={20}
-        blurClassName={profile.orbBlur}
-      />
-
-      {/* SVG Color Wave Effect */}
-      <ColorWaveEffect
-        pathCount={profile.wavePathCount}
-        segments={profile.waveSegments}
-        maxFps={profile.waveMaxFps}
-        opacityScale={profile.waveOpacityScale}
-        disabled={profile.wavePathCount === 0}
-      />
-
-      {/* Pulsing rings */}
-      <PulsingRings scale={profile.ringScale} />
-
-      {/* Grid pattern */}
-      <GridLines opacityClassName={profile.gridOpacity} />
-
-      {/* Floating particles */}
-      <FloatingParticles count={profile.particles} />
-
-      {/* Mouse follower glow */}
-      <MouseFollower disabled={!profile.showMouseFollower} />
-
-      {/* Noise texture */}
+    <LazyMotion features={domAnimation}>
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
-        }}
-      />
+        className={`fixed inset-0 -z-10 overflow-hidden ${renderBase ? "bg-background" : "bg-transparent"}`}
+      >
+        {renderBase && (
+          <>
+            {/* Always-on: light, static base */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 20% 30%, oklch(0.55 0.12 200 / 0.18), transparent 55%), radial-gradient(circle at 80% 70%, oklch(0.55 0.12 180 / 0.14), transparent 55%)",
+              }}
+            />
+            <GridLines opacityClassName={profile.gridOpacity} />
 
-      {/* Vignette effect */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 0%, oklch(0.13 0.02 250 / 0.6) 100%)",
-        }}
-      />
-    </div>
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center, transparent 0%, oklch(0.13 0.02 250 / 0.6) 100%)",
+              }}
+            />
+
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.015]"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+              }}
+            />
+          </>
+        )}
+
+        {/* Enhanced layers: enabled after idle + only when tab is visible */}
+        {isActive && (
+          <>
+            {/* Aurora bands */}
+            <AuroraBands blurClassName={profile.bandBlur} />
+
+            {/* Morphing blobs */}
+            <MorphingBlobs scale={profile.blobScale} />
+
+            {/* Large gradient orbs */}
+            <FloatingOrb
+              size={Math.round(600 * profile.blobScale)}
+              color="radial-gradient(circle, oklch(0.45 0.15 200) 0%, transparent 70%)"
+              initialX="10%"
+              initialY="20%"
+              duration={25}
+              blurClassName={profile.orbBlur}
+            />
+            <FloatingOrb
+              size={Math.round(500 * profile.blobScale)}
+              color="radial-gradient(circle, oklch(0.5 0.12 280) 0%, transparent 70%)"
+              initialX="60%"
+              initialY="50%"
+              duration={30}
+              blurClassName={profile.orbBlur}
+            />
+            <FloatingOrb
+              size={Math.round(400 * profile.blobScale)}
+              color="radial-gradient(circle, oklch(0.4 0.1 160) 0%, transparent 70%)"
+              initialX="30%"
+              initialY="70%"
+              duration={20}
+              blurClassName={profile.orbBlur}
+            />
+
+            {/* SVG Color Wave Effect */}
+            <ColorWaveEffect
+              pathCount={profile.wavePathCount}
+              segments={profile.waveSegments}
+              maxFps={profile.waveMaxFps}
+              opacityScale={profile.waveOpacityScale}
+              disabled={profile.wavePathCount === 0}
+            />
+
+            {/* Pulsing rings */}
+            <PulsingRings scale={profile.ringScale} />
+
+            {/* Floating particles */}
+            <FloatingParticles count={profile.particles} />
+
+            {/* Mouse follower glow */}
+            <MouseFollower disabled={!profile.showMouseFollower} />
+          </>
+        )}
+      </div>
+    </LazyMotion>
   );
 }
