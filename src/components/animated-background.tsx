@@ -656,7 +656,9 @@ export function AnimatedBackground({
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
+      <div
+        className={`fixed inset-0 -z-10 overflow-hidden ${renderBase ? "bg-background" : "bg-transparent"}`}
+      >
         {renderBase && (
           <>
             {/* Always-on: light, static base */}

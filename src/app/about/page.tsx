@@ -106,7 +106,7 @@ export default function AboutPage() {
                       </div>
                       <div className="h-1 bg-card/50 rounded-full overflow-hidden backdrop-blur-xl border border-border/30">
                         <div
-                          className="h-full bg-primary rounded-full motion-safe:[width:0%] motion-safe:animate-[inenico-progress_1s_ease_forwards]"
+                          className="h-full bg-primary rounded-full motion-safe:animate-[inenico-progress_1s_ease_both]"
                           style={
                             {
                               "--inenico-progress": `${skill.level}%`,
