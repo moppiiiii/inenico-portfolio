@@ -17,8 +17,8 @@ export default function HomePage() {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text content */}
-            <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-left_600ms_ease-out_both] [animation-delay:800ms]">
-              <div className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1000ms]">
+            <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-left_600ms_ease-out_both] motion-safe:[animation-delay:800ms]">
+              <div className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs text-muted-foreground">
                   Available for work
@@ -26,21 +26,21 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]">
-                <span className="block text-foreground motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1100ms]">
+                <span className="block text-foreground motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1100ms]">
                   いねにこ
                 </span>
-                <span className="block text-primary motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1200ms]">
+                <span className="block text-primary motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1200ms]">
                   {"Frontend Developer"}
                 </span>
               </h1>
 
-              <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1300ms]">
+              <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1300ms]">
                 ゆるく、でも真剣に。
                 <br />
                 デザインとコードで世界をちょっと楽しくする。
               </p>
 
-              <div className="flex flex-wrap gap-4 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1400ms]">
+              <div className="flex flex-wrap gap-4 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1400ms]">
                 <Link
                   href="/works"
                   className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-all"
@@ -58,8 +58,8 @@ export default function HomePage() {
             </div>
 
             {/* Right - Character */}
-            <div className="pointer-events-none relative flex justify-center lg:justify-end motion-reduce:animate-none opacity-0 animate-[inenico-scale-in_800ms_ease-out_both] [animation-delay:1000ms]">
-              <div className="relative motion-reduce:animate-none animate-[inenico-float_6s_ease-in-out_infinite]">
+            <div className="pointer-events-none relative flex justify-center lg:justify-end motion-safe:opacity-0 motion-safe:animate-[inenico-scale-in_800ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
+              <div className="relative motion-safe:animate-[inenico-float_6s_ease-in-out_infinite]">
                 {/* Glass card behind */}
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/20 border border-border/30 rounded-full -rotate-3" />
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/10 border border-border/20 rounded-full rotate-3" />
@@ -74,8 +74,8 @@ export default function HomePage() {
                 />
 
                 {/* Decorative ring */}
-                <div className="absolute -inset-16 border border-primary/20 rounded-full motion-reduce:animate-none animate-[spin_20s_linear_infinite]" />
-                <div className="absolute -inset-24 border border-primary/10 rounded-full motion-reduce:animate-none animate-[spin_30s_linear_infinite] [animation-direction:reverse]" />
+                <div className="absolute -inset-16 border border-primary/20 rounded-full motion-safe:animate-[spin_20s_linear_infinite]" />
+                <div className="absolute -inset-24 border border-primary/10 rounded-full motion-safe:animate-[spin_30s_linear_infinite] motion-safe:[animation-direction:reverse]" />
               </div>
             </div>
           </div>

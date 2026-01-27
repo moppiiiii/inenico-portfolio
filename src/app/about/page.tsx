@@ -34,9 +34,9 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left - Character & Stats */}
-              <div className="relative motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-left_600ms_ease-out_both] [animation-delay:800ms]">
+              <div className="relative motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-left_600ms_ease-out_both] motion-safe:[animation-delay:800ms]">
                 <div className="relative flex justify-center rounded-full">
-                  <div className="relative motion-reduce:animate-none animate-[inenico-float-small_5s_ease-in-out_infinite]">
+                  <div className="relative motion-safe:animate-[inenico-float-small_5s_ease-in-out_infinite]">
                     <div className="backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl p-8 rounded-full">
                       <Image
                         src="/images/inenico-laptop.png"
@@ -48,7 +48,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Floating stats */}
-                    <div className="absolute -top-6 -right-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-reduce:animate-none animate-[inenico-float_4s_ease-in-out_infinite]">
+                    <div className="absolute -top-6 -right-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-safe:animate-[inenico-float_4s_ease-in-out_infinite]">
                       <span className="text-3xl font-bold text-primary">
                         5+
                       </span>
@@ -57,7 +57,7 @@ export default function AboutPage() {
                       </span>
                     </div>
 
-                    <div className="absolute -bottom-6 -left-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-reduce:animate-none animate-[inenico-float_4.5s_ease-in-out_infinite] [animation-direction:reverse]">
+                    <div className="absolute -bottom-6 -left-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-safe:animate-[inenico-float_4.5s_ease-in-out_infinite] motion-safe:[animation-direction:reverse]">
                       <span className="text-3xl font-bold text-primary">
                         50+
                       </span>
@@ -70,8 +70,8 @@ export default function AboutPage() {
               </div>
 
               {/* Right - Content */}
-              <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_600ms_ease-out_both] [animation-delay:900ms]">
-                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1000ms]">
+              <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_600ms_ease-out_both] motion-safe:[animation-delay:900ms]">
+                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
                   About Me
                 </span>
 
@@ -95,7 +95,7 @@ export default function AboutPage() {
                   {skills.map((skill, index) => (
                     <div
                       key={skill.name}
-                      className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_400ms_ease-out_both]"
+                      className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
                       style={{ animationDelay: `${1100 + index * 100}ms` }}
                     >
                       <div className="flex justify-between text-sm mb-2">
@@ -106,10 +106,11 @@ export default function AboutPage() {
                       </div>
                       <div className="h-1 bg-card/50 rounded-full overflow-hidden backdrop-blur-xl border border-border/30">
                         <div
-                          className="h-full bg-primary rounded-full inenico-progress-bar motion-reduce:animate-none"
+                          className="h-full bg-primary rounded-full motion-safe:[width:0%] motion-safe:animate-[inenico-progress_1s_ease_forwards]"
                           style={
                             {
                               "--inenico-progress": `${skill.level}%`,
+                              width: "var(--inenico-progress)",
                               animationDelay: `${1200 + index * 100}ms`,
                             } as CSSProperties
                           }
@@ -133,7 +134,7 @@ export default function AboutPage() {
                           animationDelay: `${1500 + index * 100}ms`,
                         }}
                       >
-                        <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_400ms_ease-out_both]">
+                        <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]">
                           <span className="text-muted-foreground font-mono w-28">
                             {exp.year}
                           </span>

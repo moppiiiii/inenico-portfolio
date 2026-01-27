@@ -33,8 +33,8 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left - Content */}
-              <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-left_600ms_ease-out_both] [animation-delay:800ms]">
-                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:900ms]">
+              <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-left_600ms_ease-out_both] motion-safe:[animation-delay:800ms]">
+                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:900ms]">
                   Get In Touch
                 </span>
 
@@ -57,7 +57,7 @@ export default function ContactPage() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-4 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-2xl p-4 hover:bg-card/50 transition-all hover:translate-x-2 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both]"
+                      className="group flex items-center gap-4 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-2xl p-4 hover:bg-card/50 transition-all hover:translate-x-2 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both]"
                       style={{ animationDelay: `${1000 + index * 100}ms` }}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -78,8 +78,8 @@ export default function ContactPage() {
               </div>
 
               {/* Right - Character & CTA */}
-              <div className="relative flex flex-col items-center motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_600ms_ease-out_both] [animation-delay:900ms]">
-                <div className="relative mb-12 motion-reduce:animate-none animate-[inenico-float-small_5s_ease-in-out_infinite]">
+              <div className="relative flex flex-col items-center motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_600ms_ease-out_both] motion-safe:[animation-delay:900ms]">
+                <div className="relative mb-12 motion-safe:animate-[inenico-float-small_5s_ease-in-out_infinite]">
                   <div className="backdrop-blur-2xl bg-card/30 border border-border/50 rounded-[3rem] p-10 rounded-full">
                     <Image
                       src="/images/inenico-phone.png"
@@ -91,13 +91,13 @@ export default function ContactPage() {
                   </div>
 
                   {/* Speech bubble */}
-                  <div className="absolute -top-4 -right-4 backdrop-blur-2xl bg-primary text-primary-foreground rounded-2xl rounded-br-none px-4 py-2 motion-reduce:animate-none opacity-0 animate-[inenico-scale-in_600ms_ease-out_both] [animation-delay:1300ms]">
+                  <div className="absolute -top-4 -right-4 backdrop-blur-2xl bg-primary text-primary-foreground rounded-2xl rounded-br-none px-4 py-2 motion-safe:opacity-0 motion-safe:animate-[inenico-scale-in_600ms_ease-out_both] motion-safe:[animation-delay:1300ms]">
                     <span className="text-sm font-medium">Hi!</span>
                   </div>
                 </div>
 
                 {/* Footer */}
-                <p className="mt-12 text-sm text-muted-foreground motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1500ms]">
+                <p className="mt-12 text-sm text-muted-foreground motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1500ms]">
                   &copy; 2026 いねにこ. All rights reserved.
                 </p>
               </div>
