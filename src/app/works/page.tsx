@@ -1,12 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
-import { AnimatedBackground } from "@/components/animated-background";
-import { CreativeNav } from "@/components/creative-nav";
+import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
+import { SiteNav } from "@/components/site-nav";
+import { StaticBackground } from "@/components/static-background";
 
 const works = [
   {
@@ -44,67 +41,41 @@ const works = [
 ];
 
 export default function WorksPage() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
   return (
     <PageTransition>
       <main className="relative min-h-screen overflow-hidden">
-        <AnimatedBackground />
-        <CreativeNav />
+        <StaticBackground />
+        <EnhancedBackground />
+        <SiteNav />
 
         <div className="relative z-10 min-h-screen py-24 px-6">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
-            <motion.div
-              className="mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-            >
-              <motion.span
-                className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-              >
+            <div className="mb-16 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:800ms]">
+              <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:900ms]">
                 Selected Works
-              </motion.span>
+              </span>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">
                 <span className="text-foreground">Recent</span>{" "}
                 <span className="text-primary">Projects</span>
               </h1>
-            </motion.div>
+            </div>
 
             {/* Works Grid */}
             <div className="grid md:grid-cols-2 gap-6">
               {works.map((work, index) => (
-                <motion.div
+                <div
                   key={work.id}
-                  className="group relative"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 + index * 0.1 }}
-                  onMouseEnter={() => setHoveredId(work.id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                  className="group relative motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both]"
+                  style={{ animationDelay: `${1000 + index * 100}ms` }}
                 >
-                  <motion.div
-                    className="relative aspect-[4/3] backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl overflow-hidden cursor-pointer"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
+                  <div className="relative aspect-[4/3] backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl overflow-hidden cursor-pointer transition-transform duration-300 ease-out group-hover:scale-[1.02]">
                     {/* Background gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
 
                     {/* Image */}
-                    <motion.div
-                      className="absolute inset-0 flex items-center justify-center p-12"
-                      animate={{
-                        scale: hoveredId === work.id ? 1.1 : 1,
-                        y: hoveredId === work.id ? -10 : 0,
-                      }}
-                      transition={{ duration: 0.4 }}
-                    >
+                    <div className="absolute inset-0 flex items-center justify-center p-12 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-2">
                       <Image
                         src={work.image || "/placeholder.svg"}
                         alt={work.title}
@@ -112,7 +83,7 @@ export default function WorksPage() {
                         height={200}
                         className="object-contain drop-shadow-xl"
                       />
-                    </motion.div>
+                    </div>
 
                     {/* Content overlay */}
                     <div className="absolute inset-0 p-6 flex flex-col justify-between">
@@ -125,14 +96,7 @@ export default function WorksPage() {
                         </span>
                       </div>
 
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{
-                          opacity: hoveredId === work.id ? 1 : 0,
-                          y: hoveredId === work.id ? 0 : 20,
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
+                      <div className="opacity-0 translate-y-5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
                         <div className="backdrop-blur-2xl bg-background/80 border border-border/50 rounded-2xl p-4">
                           <h3 className="text-lg font-bold text-foreground mb-1">
                             {work.title}
@@ -145,30 +109,23 @@ export default function WorksPage() {
                             <ArrowUpRight className="w-4 h-4" />
                           </div>
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
-                  </motion.div>
-                </motion.div>
+                  </div>
+                </div>
               ))}
             </div>
 
             {/* View all button */}
-            <motion.div
-              className="text-center mt-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
-            >
-              <motion.button
+            <div className="text-center mt-12 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1500ms]">
+              <button
                 type="button"
-                className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 px-8 py-4 rounded-full text-sm font-medium hover:bg-card/50 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 px-8 py-4 rounded-full text-sm font-medium hover:bg-card/50 transition-all hover:scale-105 active:scale-95"
               >
                 View All Projects
                 <ArrowUpRight className="w-4 h-4" />
-              </motion.button>
-            </motion.div>
+              </button>
+            </div>
           </div>
         </div>
       </main>

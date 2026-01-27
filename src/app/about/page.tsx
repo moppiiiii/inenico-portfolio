@@ -1,10 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { AnimatedBackground } from "@/components/animated-background";
-import { CreativeNav } from "@/components/creative-nav";
+import type { CSSProperties } from "react";
+import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
+import { SiteNav } from "@/components/site-nav";
+import { StaticBackground } from "@/components/static-background";
 
 const skills = [
   { name: "Frontend Development", level: 90 },
@@ -27,29 +26,17 @@ export default function AboutPage() {
   return (
     <PageTransition>
       <main className="relative min-h-screen overflow-hidden">
-        <AnimatedBackground />
-        <CreativeNav />
+        <StaticBackground />
+        <EnhancedBackground />
+        <SiteNav />
 
         <div className="relative z-10 min-h-screen flex items-center py-24 px-6">
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left - Character & Stats */}
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
+              <div className="relative motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-left_600ms_ease-out_both] [animation-delay:800ms]">
                 <div className="relative flex justify-center rounded-full">
-                  <motion.div
-                    className="relative"
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{
-                      duration: 5,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    }}
-                  >
+                  <div className="relative motion-reduce:animate-none animate-[inenico-float-small_5s_ease-in-out_infinite]">
                     <div className="backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl p-8 rounded-full">
                       <Image
                         src="/images/inenico-laptop.png"
@@ -61,55 +48,32 @@ export default function AboutPage() {
                     </div>
 
                     {/* Floating stats */}
-                    <motion.div
-                      className="absolute -top-6 -right-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{
-                        duration: 4,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                    >
+                    <div className="absolute -top-6 -right-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-reduce:animate-none animate-[inenico-float_4s_ease-in-out_infinite]">
                       <span className="text-3xl font-bold text-primary">
                         5+
                       </span>
                       <span className="text-sm text-muted-foreground ml-2">
                         Years
                       </span>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                      className="absolute -bottom-6 -left-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3"
-                      animate={{ y: [0, 10, 0] }}
-                      transition={{
-                        duration: 4.5,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                    >
+                    <div className="absolute -bottom-6 -left-6 backdrop-blur-2xl bg-card/50 border border-border/50 rounded-2xl px-5 py-3 motion-reduce:animate-none animate-[inenico-float_4.5s_ease-in-out_infinite] [animation-direction:reverse]">
                       <span className="text-3xl font-bold text-primary">
                         50+
                       </span>
                       <span className="text-sm text-muted-foreground ml-2">
                         Projects
                       </span>
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right - Content */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9, duration: 0.6 }}
-              >
-                <motion.span
-                  className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                >
+              <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_600ms_ease-out_both] [animation-delay:900ms]">
+                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1000ms]">
                   About Me
-                </motion.span>
+                </span>
 
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                   <span className="text-foreground">ものづくりが</span>
@@ -129,11 +93,10 @@ export default function AboutPage() {
                     Skills
                   </h3>
                   {skills.map((skill, index) => (
-                    <motion.div
+                    <div
                       key={skill.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1.1 + index * 0.1 }}
+                      className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_400ms_ease-out_both]"
+                      style={{ animationDelay: `${1100 + index * 100}ms` }}
                     >
                       <div className="flex justify-between text-sm mb-2">
                         <span className="text-foreground">{skill.name}</span>
@@ -142,14 +105,17 @@ export default function AboutPage() {
                         </span>
                       </div>
                       <div className="h-1 bg-card/50 rounded-full overflow-hidden backdrop-blur-xl border border-border/30">
-                        <motion.div
-                          className="h-full bg-primary rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1, delay: 1.2 + index * 0.1 }}
+                        <div
+                          className="h-full bg-primary rounded-full inenico-progress-bar motion-reduce:animate-none"
+                          style={
+                            {
+                              "--inenico-progress": `${skill.level}%`,
+                              animationDelay: `${1200 + index * 100}ms`,
+                            } as CSSProperties
+                          }
                         />
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
@@ -160,25 +126,27 @@ export default function AboutPage() {
                   </h3>
                   <div className="space-y-3">
                     {experiences.map((exp, index) => (
-                      <motion.div
+                      <div
                         key={exp.year}
                         className="flex items-center gap-4 text-sm"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.5 + index * 0.1 }}
+                        style={{
+                          animationDelay: `${1500 + index * 100}ms`,
+                        }}
                       >
-                        <span className="text-muted-foreground font-mono w-28">
-                          {exp.year}
-                        </span>
-                        <span className="text-foreground">{exp.role}</span>
-                        <span className="text-muted-foreground">
-                          @ {exp.company}
-                        </span>
-                      </motion.div>
+                        <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-right_400ms_ease-out_both]">
+                          <span className="text-muted-foreground font-mono w-28">
+                            {exp.year}
+                          </span>
+                          <span className="text-foreground">{exp.role}</span>
+                          <span className="text-muted-foreground">
+                            @ {exp.company}
+                          </span>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

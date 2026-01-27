@@ -1,76 +1,46 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatedBackground } from "@/components/animated-background";
-import { CreativeNav } from "@/components/creative-nav";
+import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
+import { SiteNav } from "@/components/site-nav";
+import { StaticBackground } from "@/components/static-background";
 
 export default function HomePage() {
   return (
     <PageTransition>
       <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <AnimatedBackground />
-        <CreativeNav />
+        <StaticBackground />
+        <EnhancedBackground />
+        <SiteNav />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
-              <motion.div
-                className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-              >
+            <div className="motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-left_600ms_ease-out_both] [animation-delay:800ms]">
+              <div className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1000ms]">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs text-muted-foreground">
                   Available for work
                 </span>
-              </motion.div>
+              </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]">
-                <motion.span
-                  className="block text-foreground"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1 }}
-                >
+                <span className="block text-foreground motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1100ms]">
                   いねにこ
-                </motion.span>
-                <motion.span
-                  className="block text-primary"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                >
+                </span>
+                <span className="block text-primary motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1200ms]">
                   {"Frontend Developer"}
-                </motion.span>
+                </span>
               </h1>
 
-              <motion.p
-                className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.3 }}
-              >
+              <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1300ms]">
                 ゆるく、でも真剣に。
                 <br />
                 デザインとコードで世界をちょっと楽しくする。
-              </motion.p>
+              </p>
 
-              <motion.div
-                className="flex flex-wrap gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 }}
-              >
+              <div className="flex flex-wrap gap-4 motion-reduce:animate-none opacity-0 animate-[inenico-fade-in-up_500ms_ease-out_both] [animation-delay:1400ms]">
                 <Link
                   href="/works"
                   className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-all"
@@ -84,25 +54,12 @@ export default function HomePage() {
                 >
                   Contact
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Right - Character */}
-            <motion.div
-              className="pointer-events-none relative flex justify-center lg:justify-end"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-            >
-              <motion.div
-                className="relative"
-                animate={{ y: [0, -20, 0] }}
-                transition={{
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              >
+            <div className="pointer-events-none relative flex justify-center lg:justify-end motion-reduce:animate-none opacity-0 animate-[inenico-scale-in_800ms_ease-out_both] [animation-delay:1000ms]">
+              <div className="relative motion-reduce:animate-none animate-[inenico-float_6s_ease-in-out_infinite]">
                 {/* Glass card behind */}
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/20 border border-border/30 rounded-full -rotate-3" />
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/10 border border-border/20 rounded-full rotate-3" />
@@ -117,26 +74,10 @@ export default function HomePage() {
                 />
 
                 {/* Decorative ring */}
-                <motion.div
-                  className="absolute -inset-16 border border-primary/20 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "linear",
-                  }}
-                />
-                <motion.div
-                  className="absolute -inset-24 border border-primary/10 rounded-full"
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 30,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "linear",
-                  }}
-                />
-              </motion.div>
-            </motion.div>
+                <div className="absolute -inset-16 border border-primary/20 rounded-full motion-reduce:animate-none animate-[spin_20s_linear_infinite]" />
+                <div className="absolute -inset-24 border border-primary/10 rounded-full motion-reduce:animate-none animate-[spin_30s_linear_infinite] [animation-direction:reverse]" />
+              </div>
+            </div>
           </div>
         </div>
       </main>
