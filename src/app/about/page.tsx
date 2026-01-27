@@ -129,22 +129,18 @@ export default function AboutPage() {
                     {experiences.map((exp, index) => (
                       <div
                         key={exp.year}
-                        className="flex items-center gap-4 text-sm"
+                        className="flex items-center gap-4 text-sm motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
+                        style={{
+                          animationDelay: `${1500 + index * 100}ms`,
+                        }}
                       >
-                        <div
-                          className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
-                          style={{
-                            animationDelay: `${1500 + index * 100}ms`,
-                          }}
-                        >
-                          <span className="text-muted-foreground font-mono w-28">
-                            {exp.year}
-                          </span>
-                          <span className="text-foreground">{exp.role}</span>
-                          <span className="text-muted-foreground">
-                            @ {exp.company}
-                          </span>
-                        </div>
+                        <span className="text-muted-foreground font-mono w-28">
+                          {exp.year}
+                        </span>
+                        <span className="text-foreground">{exp.role}</span>
+                        <span className="text-muted-foreground">
+                          @ {exp.company}
+                        </span>
                       </div>
                     ))}
                   </div>
