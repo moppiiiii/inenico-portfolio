@@ -4,23 +4,7 @@ import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
 import { SiteNav } from "@/components/site-nav";
 import { StaticBackground } from "@/components/static-background";
-
-const skills = [
-  { name: "Frontend Development", level: 90 },
-  { name: "UI/UX Design", level: 85 },
-  { name: "Backend Development", level: 75 },
-  { name: "3D / Motion Design", level: 70 },
-];
-
-const experiences = [
-  { year: "2025 - now", role: "Frontend Dev Lead", company: "???" },
-  { year: "2023 - 2025", role: "Frontend Dev Lead", company: "YUMEMI Inc." },
-  {
-    year: "2020 - 2023",
-    role: "Frontend Dev / Lead",
-    company: "Sky Co., Ltd.",
-  },
-];
+import { experiences, skills } from "@/data/about";
 
 export default function AboutPage() {
   return (
@@ -44,6 +28,7 @@ export default function AboutPage() {
                         width={300}
                         height={300}
                         className="relative z-10 rounded-full"
+                        priority
                       />
                     </div>
 

@@ -5,13 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-const navItems = [
-  { href: "/", label: "Home", num: "01" },
-  { href: "/about", label: "About", num: "02" },
-  { href: "/works", label: "Works", num: "03" },
-  { href: "/contact", label: "Contact", num: "04" },
-];
+import { navItems } from "@/data/navigation";
 
 type CreativeNavProps = {
   currentYear: number;

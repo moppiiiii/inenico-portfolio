@@ -1,25 +1,10 @@
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
 import { SiteNav } from "@/components/site-nav";
 import { StaticBackground } from "@/components/static-background";
-import { XIcon } from "@/components/x-icon";
-
-const socials = [
-  {
-    icon: Github,
-    label: "GitHub",
-    href: "https://github.com",
-    handle: "@inenico",
-  },
-  {
-    icon: XIcon,
-    label: "X",
-    href: "https://twitter.com",
-    handle: "@inenico",
-  },
-];
+import { socials } from "@/data/socials";
 
 export default function ContactPage() {
   return (
@@ -87,6 +72,7 @@ export default function ContactPage() {
                       width={250}
                       height={250}
                       className="relative z-10 rounded-full"
+                      priority
                     />
                   </div>
 
