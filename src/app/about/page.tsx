@@ -18,7 +18,7 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left - Character & Stats */}
-              <div className="relative motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-left_600ms_ease-out_both] motion-safe:[animation-delay:800ms]">
+              <div className="relative">
                 <div className="relative flex justify-center rounded-full">
                   <div className="relative motion-safe:animate-[inenico-float-small_5s_ease-in-out_infinite]">
                     <div className="backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl p-8 rounded-full">
@@ -29,6 +29,7 @@ export default function AboutPage() {
                         height={300}
                         className="relative z-10 rounded-full"
                         priority
+                        fetchPriority="high"
                       />
                     </div>
 
@@ -55,8 +56,8 @@ export default function AboutPage() {
               </div>
 
               {/* Right - Content */}
-              <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_600ms_ease-out_both] motion-safe:[animation-delay:900ms]">
-                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
+              <div>
+                <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:100ms]">
                   About Me
                 </span>
 
@@ -66,7 +67,7 @@ export default function AboutPage() {
                   <span className="text-primary">好きです</span>
                 </h1>
 
-                <p className="text-muted-foreground mb-10 leading-relaxed">
+                <p className="text-muted-foreground mb-10 leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:50ms]">
                   フロントエンド開発を中心に、個人開発ではバックエンドまで幅広く手がけています。
                   ユーザーが触れて楽しいと感じるインターフェースを作ることが目標です。
                   ゆるいキャラクターですが、仕事は真剣に取り組んでいます。
@@ -81,7 +82,7 @@ export default function AboutPage() {
                     <div
                       key={skill.name}
                       className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
-                      style={{ animationDelay: `${1100 + index * 100}ms` }}
+                      style={{ animationDelay: `${150 + index * 50}ms` }}
                     >
                       <div className="flex justify-between text-sm mb-2">
                         <span className="text-foreground">{skill.name}</span>
@@ -96,7 +97,7 @@ export default function AboutPage() {
                             {
                               "--inenico-progress": `${skill.level}%`,
                               width: "var(--inenico-progress)",
-                              animationDelay: `${1200 + index * 100}ms`,
+                              animationDelay: `${200 + index * 50}ms`,
                             } as CSSProperties
                           }
                         />
@@ -116,7 +117,7 @@ export default function AboutPage() {
                         key={exp.year}
                         className="flex items-center gap-4 text-sm motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
                         style={{
-                          animationDelay: `${1500 + index * 100}ms`,
+                          animationDelay: `${300 + index * 50}ms`,
                         }}
                       >
                         <span className="text-muted-foreground font-mono w-28">

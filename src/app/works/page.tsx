@@ -17,8 +17,8 @@ export default function WorksPage() {
         <div className="relative z-10 min-h-screen py-24 px-6">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="mb-16 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:800ms]">
-              <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:900ms]">
+            <div className="mb-16">
+              <span className="inline-block backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 text-xs text-muted-foreground mb-6 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:100ms]">
                 Selected Works
               </span>
 
@@ -33,8 +33,8 @@ export default function WorksPage() {
               {works.map((work, index) => (
                 <div
                   key={work.id}
-                  className="group relative motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both]"
-                  style={{ animationDelay: `${1000 + index * 100}ms` }}
+                  className="group relative motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both]"
+                  style={{ animationDelay: `${100 + index * 75}ms` }}
                 >
                   <div className="relative aspect-[4/3] backdrop-blur-2xl bg-card/30 border border-border/50 rounded-3xl overflow-hidden cursor-pointer transition-transform duration-300 ease-out group-hover:scale-[1.02]">
                     {/* Background gradient */}
@@ -84,7 +84,7 @@ export default function WorksPage() {
             </div>
 
             {/* View all button */}
-            <div className="text-center mt-12 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1500ms]">
+            <div className="text-center mt-12 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:400ms]">
               <button
                 type="button"
                 className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 px-8 py-4 rounded-full text-sm font-medium hover:bg-card/50 transition-all hover:scale-105 active:scale-95"
