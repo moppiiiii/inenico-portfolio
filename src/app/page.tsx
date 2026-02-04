@@ -34,8 +34,6 @@ export default function HomePage() {
 
               <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:100ms]">
                 ゆるく、でも真剣に。
-                <br />
-                デザインとコードで世界をちょっと楽しくする。
               </p>
 
               <div className="flex flex-wrap gap-4 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:200ms]">

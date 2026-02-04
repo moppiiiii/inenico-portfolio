@@ -69,7 +69,6 @@ export default function AboutPage() {
 
                 <p className="text-muted-foreground mb-10 leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:50ms]">
                   フロントエンド開発を中心に、個人開発ではバックエンドまで幅広く手がけています。
-                  ユーザーが触れて楽しいと感じるインターフェースを作ることが目標です。
                   ゆるいキャラクターですが、仕事は真剣に取り組んでいます。
                 </p>
 
