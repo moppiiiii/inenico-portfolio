@@ -17,8 +17,8 @@ export default function HomePage() {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text content */}
-            <div className="motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-left_600ms_ease-out_both] motion-safe:[animation-delay:800ms]">
-              <div className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
+            <div>
+              <div className="inline-flex items-center gap-2 backdrop-blur-2xl bg-card/30 border border-border/50 rounded-full px-4 py-2 mb-8 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:200ms]">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs text-muted-foreground">
                   Available for work
@@ -26,21 +26,17 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]">
-                <span className="block text-foreground motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1100ms]">
-                  いねにこ
-                </span>
-                <span className="block text-primary motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1200ms]">
+                <span className="block text-foreground">いねにこ</span>
+                <span className="block text-primary">
                   {"Frontend Developer"}
                 </span>
               </h1>
 
-              <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1300ms]">
+              <p className="text-lg text-muted-foreground mb-10 max-w-md leading-relaxed motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:100ms]">
                 ゆるく、でも真剣に。
-                <br />
-                デザインとコードで世界をちょっと楽しくする。
               </p>
 
-              <div className="flex flex-wrap gap-4 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_500ms_ease-out_both] motion-safe:[animation-delay:1400ms]">
+              <div className="flex flex-wrap gap-4 motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-up_400ms_ease-out_both] motion-safe:[animation-delay:200ms]">
                 <Link
                   href="/works"
                   className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-all"
@@ -58,7 +54,7 @@ export default function HomePage() {
             </div>
 
             {/* Right - Character */}
-            <div className="pointer-events-none relative flex justify-center lg:justify-end motion-safe:opacity-0 motion-safe:animate-[inenico-scale-in_800ms_ease-out_both] motion-safe:[animation-delay:1000ms]">
+            <div className="pointer-events-none relative flex justify-center lg:justify-end">
               <div className="relative motion-safe:animate-[inenico-float_6s_ease-in-out_infinite]">
                 {/* Glass card behind */}
                 <div className="absolute -inset-8 backdrop-blur-2xl bg-card/20 border border-border/30 rounded-full -rotate-3" />
@@ -71,6 +67,7 @@ export default function HomePage() {
                   height={350}
                   className="relative z-10 drop-shadow-2xl rounded-full"
                   priority
+                  fetchPriority="high"
                 />
 
                 {/* Decorative ring */}

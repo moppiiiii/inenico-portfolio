@@ -1,6 +1,8 @@
 import { CreativeNav } from "@/components/creative-nav";
 
+// Build-time constant - only computed once during build
+const CURRENT_YEAR = new Date().getFullYear();
+
 export function SiteNav() {
-  const currentYear = new Date().getFullYear();
-  return <CreativeNav currentYear={currentYear} />;
+  return <CreativeNav currentYear={CURRENT_YEAR} />;
 }
