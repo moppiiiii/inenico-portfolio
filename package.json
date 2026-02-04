@@ -7,7 +7,6 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint:next": "next lint",
     "lint:biome": "biome check ./src",
     "fix:biome": "biome check --write ./src",
     "lint": "run-p lint:*",
