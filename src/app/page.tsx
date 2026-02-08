@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
+import { RotatingText } from "@/components/rotating-text";
 import { SiteNav } from "@/components/site-nav";
 import { StaticBackground } from "@/components/static-background";
 
@@ -26,7 +27,7 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]">
-                <span className="block text-foreground">いねにこ</span>
+                <RotatingText />
                 <span className="block text-primary">
                   {"Frontend Developer"}
                 </span>
