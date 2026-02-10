@@ -9,8 +9,8 @@ import { skills } from "@/data/about";
 import { getExperiences } from "@/libs/microcms";
 
 function formatExperienceYear(startDate: string, endDate?: string): string {
-  const startYear = new Date(startDate).getFullYear().toString();
-  const endYear = endDate ? new Date(endDate).getFullYear().toString() : "now";
+  const startYear = startDate.slice(0, 4);
+  const endYear = endDate ? endDate.slice(0, 4) : "now";
   return `${startYear} - ${endYear}`;
 }
 
