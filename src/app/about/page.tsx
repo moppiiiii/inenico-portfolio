@@ -8,6 +8,8 @@ import { StaticBackground } from "@/components/static-background";
 import { skills } from "@/data/about";
 import { getExperiences } from "@/libs/microcms";
 
+export const revalidate = 3600;
+
 function formatExperienceYear(startDate: string, endDate?: string): string {
   const startYear = startDate.slice(0, 4);
   const endYear = endDate ? endDate.slice(0, 4) : "now";
@@ -16,6 +18,7 @@ function formatExperienceYear(startDate: string, endDate?: string): string {
 
 async function ExperienceList() {
   const { contents: experiences } = await getExperiences();
+
   return (
     <div className="space-y-3">
       {experiences.map((exp, index) => (
@@ -141,7 +144,7 @@ export default function AboutPage() {
                   <h3 className="text-sm font-medium text-foreground mb-4">
                     Experience
                   </h3>
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<div className="h-[84px]" />}>
                     <ExperienceList />
                   </Suspense>
                 </div>
