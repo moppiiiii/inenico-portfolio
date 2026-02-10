@@ -1,10 +1,47 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import { Suspense } from "react";
 import { EnhancedBackground } from "@/components/enhanced-background";
 import { PageTransition } from "@/components/page-transition";
 import { SiteNav } from "@/components/site-nav";
 import { StaticBackground } from "@/components/static-background";
-import { experiences, skills } from "@/data/about";
+import { skills } from "@/data/about";
+import { getExperiences } from "@/libs/microcms";
+
+export const revalidate = 3600;
+
+function formatExperienceYear(
+  startDate: string,
+  endDate?: string | null,
+): string {
+  const startYear = startDate.slice(0, 4);
+  const endYear = endDate ? endDate.slice(0, 4) : "now";
+  return `${startYear} - ${endYear}`;
+}
+
+async function ExperienceList() {
+  const { contents: experiences } = await getExperiences();
+
+  return (
+    <div className="space-y-3">
+      {experiences.map((exp, index) => (
+        <div
+          key={exp.id}
+          className="flex items-center gap-4 text-sm motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
+          style={{
+            animationDelay: `${300 + index * 50}ms`,
+          }}
+        >
+          <span className="text-muted-foreground font-mono w-28">
+            {formatExperienceYear(exp.start_date, exp.end_date)}
+          </span>
+          <span className="text-foreground">{exp.role}</span>
+          <span className="text-muted-foreground">@ {exp.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -110,25 +147,9 @@ export default function AboutPage() {
                   <h3 className="text-sm font-medium text-foreground mb-4">
                     Experience
                   </h3>
-                  <div className="space-y-3">
-                    {experiences.map((exp, index) => (
-                      <div
-                        key={exp.year}
-                        className="flex items-center gap-4 text-sm motion-safe:opacity-0 motion-safe:animate-[inenico-fade-in-right_400ms_ease-out_both]"
-                        style={{
-                          animationDelay: `${300 + index * 50}ms`,
-                        }}
-                      >
-                        <span className="text-muted-foreground font-mono w-28">
-                          {exp.year}
-                        </span>
-                        <span className="text-foreground">{exp.role}</span>
-                        <span className="text-muted-foreground">
-                          @ {exp.company}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  <Suspense fallback={<div className="h-[84px]" />}>
+                    <ExperienceList />
+                  </Suspense>
                 </div>
               </div>
             </div>
