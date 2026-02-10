@@ -37,5 +37,5 @@ async function fetchList<T>(
 export async function getExperiences(
   queries?: MicroCMSQueries,
 ): Promise<ExperienceListResponse> {
-  return fetchList("experiencies", experienceListSchema, queries);
+  return fetchList("experiences", experienceListSchema, queries);
 }
