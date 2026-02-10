@@ -8,7 +8,7 @@ export const experienceSchema = microcmsListContentSchema.extend({
   name: z.string(),
   role: z.string(),
   start_date: z.string(),
-  end_date: z.string().optional(),
+  end_date: z.string().nullable().optional(),
 });
 
 export const experienceListSchema =

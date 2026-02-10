@@ -10,7 +10,10 @@ import { getExperiences } from "@/libs/microcms";
 
 export const revalidate = 3600;
 
-function formatExperienceYear(startDate: string, endDate?: string): string {
+function formatExperienceYear(
+  startDate: string,
+  endDate?: string | null,
+): string {
   const startYear = startDate.slice(0, 4);
   const endYear = endDate ? endDate.slice(0, 4) : "now";
   return `${startYear} - ${endYear}`;
